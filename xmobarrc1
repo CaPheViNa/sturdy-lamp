@@ -1,0 +1,31 @@
+Config { font = "xft:mononoki Nerd Mono:weight=regular:pixelsize=12:antialias=true:hinting=true"
+       , additionalFonts = [ "xft:Mononoki Nerd Font:pixelsize=11:antialias=true:hinting=true"
+                           , "xft:Font Awesome 5 Free Solid:pixelsize=12"
+                           ]
+       , borderColor = "black"
+       , border = TopB
+       , bgColor = "black"
+       , fgColor = "white"
+       , alpha = 255
+       , position = Static { xpos = 0, ypos = 0, width = 1050, height = 20 } 
+       , textOffset = -1
+       , iconOffset = -1
+       , lowerOnStart = True
+       , pickBroadest = False
+       , persistent = True
+       , hideOnStart = False
+       , iconRoot = "/home/vieto/.xmonad/xpm/" -- default: "."
+       , allDesktops = True
+       , overrideRedirect = True
+       , commands = [ Run Weather "EDSB" ["-t"," <fn=2>\xf76b</fn> <tempC>°C  |  <fn=2>\xf043</fn> <rh>%  |  <pressure> hPa  |  <fn=2>\xf72e</fn> <windKmh> km/h",
+                                          "-L","18","-H","25",
+                                          "--normal","green",
+                                          "--high","red",
+                                          "--low","lightblue"] 36000
+                    , Run Date "<fc=#87ceff><fn=2>\xf017</fn> %H:%M:%S</fc>" "date" 10
+                    , Run UnsafeStdinReader
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = " %UnsafeStdinReader%"
+}

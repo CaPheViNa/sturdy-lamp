@@ -1,0 +1,39 @@
+Config { font = "xft:Mononoki Nerd Mono:weight=regular:pixelsize=12:antialias=true:hinting=true"
+       , additionalFonts = [ "xft:Mononoki Nerd Mono:pixelsize=13:antialias=true:hinting=true"
+                           , "xft:Font Awesome 5 Free Solid:pixelsize=12"
+                           , "xft:Mononoki Nerd Mono:weight=bold:pixelsize=12:antialias=true:hinting=true"
+                           ]
+       , borderColor = "black"
+       , border = TopB
+       , bgColor = "black"
+       , fgColor = "white"
+       , alpha = 255
+       , position = Static { xpos = 1050, ypos = 0, width = 1920, height = 20 } 
+       , textOffset = -1
+       , iconOffset = -1
+       , lowerOnStart = True
+       , pickBroadest = False
+       , persistent = True
+       , hideOnStart = False
+       , iconRoot = "/home/vieto/.xmonad/xpm/" -- default: "."
+       , allDesktops = True
+       , overrideRedirect = True
+       , commands = [ Run Weather "EDSB" ["-t","<fn=2>\xf76b</fn> <tempC>°C    <fc=#26a98b><fn=2>\xf043</fn> <rh> %</fc>    <fc=#599caa><pressure> hPa</fc>    <fc=#d26939><fn=2>\xf72e</fn> <windKmh> km/h  <windCardinal><windAzimuth>°</fc>",
+                                          "-L","18","-H","25",
+                                          "--normal","green",
+                                          "--high","red",
+                                          "--low","lightblue"] 1800
+                    , Run Network "eno1" ["-t", "<fn=2>\xf0ab</fn> <rx> kB/s <fn=2>\xf0aa</fn> <tx> kB/s"] 11
+                    , Run Cpu ["-t", "<fn=2>\xf108</fn> CPU: <total> %", "-H","50","--high","red"] 18
+                    , Run Memory ["-t","<fc=#e34234><fn=2>\xf233</fn> MEM: <usedratio> %</fc>"] 25
+                    , Run Swap [] 10
+                    , Run DiskU [("/", "<fn=2>\xf0c7</fn> HDD: <free> free")] [] 100
+                    , Run Com "uname" ["-s","-r"] "" 36000
+                    , Run Date "<fc=#edb54b><fn=2>\xf783</fn> %Y-%m-%d </fc><fn=3><fc=#edb54b>[<box type=Bottom width=2 color=skyblue>%V</box>] [%a]</fc></fn>    <fn=2>\xf017</fn> %H:%M:%S" "date" 10
+                    , Run Com "/home/vieto/.config/xmobar/trayer-padding-icon.sh" [] "trayerpad" 21
+                    , Run UnsafeStdinReader
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = " %UnsafeStdinReader% }{<fc=#b294bb>%eno1%</fc>    <fc=#8c9440>%cpu%</fc>    <fc=#85678f>%disku%</fc>     <action=`alacritty -e htop`>%memory%</action>    %EDSB%    %date%  %trayerpad%"
+}
