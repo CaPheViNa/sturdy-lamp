@@ -1,0 +1,9 @@
+! Unmap Caps_Lock and assign Escape to key(code) 66 (former Caps_Lock-Key)
+clear Lock
+! Assign Hyper_L to Key 66 (Former Caps_Lock)
+keycode 66 = Hyper_L
+! Remove Hyper_L from Modifier 4, Add it to Modifier 3
+remove mod4 = Hyper_L
+add mod3 = Hyper_L
+! --> xcape -e "Hyper_L=Escape" <-- in xmonad.hs
+keycode 78 = Scroll_Lock Caps_Lock Scroll_Lock
